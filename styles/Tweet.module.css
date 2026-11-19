@@ -1,0 +1,39 @@
+.tweetContainer {
+    background-color: rgb(57, 56, 56);
+    display: flex;
+}
+
+/* Left Container*/
+.leftContainer {
+    font-family: 'Mont-Heavy', Verdana, sans-serif;
+    align-items: self-end;
+    width: 20%;
+    height: 100%;
+}
+
+.twitterIcon {
+    display: flex;
+}
+
+/* Home */
+.homeContainer {
+    font-family: 'Mont-Heavy', Verdana, sans-serif;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+}
+
+.buttonTweet {
+    background-color: deepskyblue;
+    border-radius: 30%;
+    align-items: flex-end;
+}
+
+/*Hashtag container */
+
+.hashtagContainer {
+    
+    font-family: 'Mont-Heavy', Verdana, sans-serif;
+    width: 30%;
+    height: 100%;
+}
