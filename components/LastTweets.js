@@ -3,11 +3,11 @@ import { faHeart, faUserCircle} from "@fortawesome/free-solid-svg-icons";
 import styles from "../styles/LastTweets.module.css"
 
 function LastTweets (props) {
-
+/*
  if (props.user.token !== )  {
 
  } 
-
+*/
 return (
 <div>
 <FontAwesomeIcon
