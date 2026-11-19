@@ -1,6 +1,7 @@
 .tweetContainer {
     background-color: rgb(57, 56, 56);
     display: flex;
+    height: 100%;
 }
 
 /* Left Container*/

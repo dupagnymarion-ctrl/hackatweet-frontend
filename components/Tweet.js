@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 import styles from "../styles/Tweet.module.css";
 import { useEffect, useState } from "react";
+import Trends from "./Trends"
 
 function Tweets() {
 const[tweet, setTweet]= useState('')
@@ -12,7 +13,7 @@ const[newTweet, setNewTweet] = useState(false)
 // 1 récupere tous les tweets au chargement de la base de données
 
 useEffect(() => {
-    fetch('http://localhost:3000/tweet')
+    fetch('http://localhost:3000/tweet/Klu1LWnJSC-iVMcztCczLApwLxbknIIR')
     .then(response => response.json())
     .then(data => {
         if(data.result) {
@@ -87,8 +88,7 @@ const lastTweets = tweetsData.map((data, i) => {
         {lastTweets}
         </div>
       <div className={styles.hashtagContainer}>
-        <h3>Trends</h3>
-        <p>Liste Hashtag Components</p>
+        <Trends />
       </div>
     </div>
   );
