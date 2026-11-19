@@ -4,7 +4,9 @@ import styles from "../styles/LastTweets.module.css"
 
 function LastTweets (props) {
 
-    
+ if (props.user.token !== )  {
+
+ } 
 
 return (
 <div>
@@ -14,8 +16,8 @@ return (
           style={faUserCircle}
           className={styles.userIcon}
         />
-<h3>email</h3><span>- 5 hours</span>
-<p>message</p>
+<h3>{props.username}</h3><span>- 5 hours</span>
+<p>{props.message}</p>
 <FontAwesomeIcon
           onClick={() => handleLikeClick()}
           icon={faHeart}
