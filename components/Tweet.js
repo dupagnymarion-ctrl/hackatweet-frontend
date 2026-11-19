@@ -12,7 +12,7 @@ const[newTweet, setNewTweet] = useState(false)
 // 1 récupere tous les tweets au chargement de la base de données
 
 useEffect(() => {
-    fetch('http://localhost:3000/tweet')
+    fetch('http://localhost:3000/tweet/YjPL-MJi1S2HRSliTfuFeWPQJH9_KwT0')
     .then(response => response.json())
     .then(data => {
         if(data.result) {
