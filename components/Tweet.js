@@ -17,9 +17,12 @@ useEffect(() => {
     .then(data => {
         if(data.result) {
             setTweetsData(data.tweets)
+            console.log("data.t", data.tweets)
         }
     });
 }, [newTweet]);
+
+
 
 
 // 2 Envoyer un nouveau tweet vers la base de données
@@ -33,7 +36,7 @@ fetch('http://localhost:3000/tweet/add', {
 			.then(data => {
                 if (data.result) {
                 console.log(data)
-                setTweetsData([data.tweets, ...tweetsData]);
+                setTweetsData([...tweetsData, data.tweets]);
                 setTweet('');
                 setNewTweet(!newTweet)
                 }
@@ -59,11 +62,12 @@ const deleteTweet = (tweet_id) => {
 const lastTweets = tweetsData.map((data, i) => {
     <LastTweets 
     key={i}
-    id={data._id}
-    texte={data.message}
-    token={data.user.token}
-    delete={deleteTweet}
+   // id={data._id}
+   // texte={data.message}
+   // token={data.user.token}
+   // delete={deleteTweet}
     />
+    console.log(data)
 })
 
   return (

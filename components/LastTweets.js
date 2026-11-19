@@ -4,9 +4,9 @@ import styles from "../styles/LastTweets.module.css"
 
 function LastTweets (props) {
 
- if (props.user.token !== )  {
 
- } 
+
+ 
 
 return (
 <div>
