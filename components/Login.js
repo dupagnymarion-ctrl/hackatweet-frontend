@@ -1,5 +1,5 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { useState } from "react";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
@@ -58,6 +58,27 @@ function Login() {
             </button>
 
             <SignUp />
+          </div>
+        </div>
+      )}
+
+      {isSignInOpen && (
+        <div className={styles.overlay}>
+          <div
+            className={styles.modal}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Connexion"
+          >
+            <button
+              className={styles.closeButton}
+              aria-label="Fermer"
+              onClick={() => setSignInOpen(false)}
+            >
+              ×
+            </button>
+
+            <SignIn />
           </div>
         </div>
       )}

@@ -1,4 +1,4 @@
-import styles from '../styles/Trends.module.css';
+import styles from "../styles/Trends.module.css";
 
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -36,14 +36,12 @@ function Trends() {
 
   return (
     <div>
-     <div className={styles.container}>
-        <h1>Trends</h1></div>
-        <div className={styles.trendsList}>
-        {trends}
-        </div>
+      <div className={styles.container}>
+        <h1>Trends</h1>
+      </div>
+      <div className={styles.trendsList}>{trends}</div>
     </div>
   );
 }
 
-export default Trends
-;
+export default Trends;
