@@ -7,6 +7,7 @@ import Trends from "./Trends";
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 import { login, logout } from '../reducers/user';
+import { newTrigger } from '../reducers/trend';
 import { useRouter } from "next/navigation";
 
 function Tweets() {
@@ -56,9 +57,25 @@ function Tweets() {
    fetchTweets()
   },[newTweet]);
 
+  const postTrend = (id, hashtag) => {
+    fetch("http://localhost:3000/trend/add", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        token: user.token,
+        tweet_id: id,
+        hashtag
+      }),
+    })
+    dispatch(newTrigger())
+  };
+
+
   // 2 Envoyer un nouveau tweet vers la base de données
 
   const postTweet = () => {
+    let hashtag = tweet.match(/#\w+/g);
+
     fetch("http://localhost:3000/tweet/add", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -70,6 +87,10 @@ function Tweets() {
       .then((response) => response.json())
       .then((data) => {
         if (data.result) {
+          if(hashtag.length > 0) {
+            postTrend(data.tweets._id,hashtag)
+          }
+          //console.log(data.tweets._id)
           //setTweetsData([...tweetsData, data.tweets]);
           setTweet("");
           setNewTweet(!newTweet); // état se recharge dès un nouveau tweet
@@ -120,6 +141,7 @@ function Tweets() {
 
   const logoutClick = () => {
     dispatch(logout());
+    router.push("/");
   };
 
   return (

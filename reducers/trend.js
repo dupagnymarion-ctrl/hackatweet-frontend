@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   value: null,
+  trigger:false
 };
 
 export const trendSlice = createSlice({
@@ -14,8 +15,11 @@ export const trendSlice = createSlice({
     reset: (state) => {
       state.value = null;
     },
+    newTrigger: (state, action) => {
+      state.trigger = !state.trigger;
+    }
   },
 });
 
-export const { research, reset } = trendSlice.actions;
+export const { research, reset,newTrigger } = trendSlice.actions;
 export default trendSlice.reducer;
