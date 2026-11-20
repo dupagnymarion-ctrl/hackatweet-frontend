@@ -13,6 +13,7 @@ const[tweetsData, setTweetsData] = useState([]);
 const[newTweet, setNewTweet] = useState(false);
 const router = useRouter();
 
+const user = useSelector((state) => state.user.value)
   // 1 récupere tous les tweets au chargement de la base de données
 
   useEffect(() => {
@@ -20,7 +21,7 @@ const router = useRouter();
       return;
     }
 
-    fetch("http://localhost:3000/tweet", {
+    fetch(`http://localhost:3000/tweet/${user.token}`, {
       headers: {
         Authorization: `Bearer ${user.token}`,
       },
@@ -73,7 +74,7 @@ fetch('http://localhost:3000/tweet/add', {
       key={i}
       id={data._id}
       texte={data.message}
-      token={data.user.token}
+      token={user.token}
       delete={deleteTweet}
     />;
   });
@@ -102,7 +103,6 @@ const logout = () => {
       </div>
         {lastTweets}
         </div>
-        {lastTweets}
       <div className={styles.hashtagContainer}>
         <Trends />
       </div>

@@ -70,8 +70,7 @@ function SignUp() {
         value={password}
         onChange={(event) => setPassword(event.target.value)}
       />
-      <Link href="/tweet">Go to profile page</Link>
-      {/*<button onClick={handleSignUp}>Sign up</button>*/}
+      <button onClick={handleSignUp}>Sign up</button>
     </div>
   );
 }
