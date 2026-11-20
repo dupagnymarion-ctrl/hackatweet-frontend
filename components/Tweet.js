@@ -41,7 +41,7 @@ function Tweets() {
                 id={data._id}
                 message={data.message}
                 token={user.token}
-                delete={deleteTweet}
+                deleteTweet={deleteTweet}
                 userConnection={userConnection}
                 isLiked={data.isLiked}
                 likeTweet={() => likeTweet(data._id, data.isLiked)} 
@@ -101,15 +101,16 @@ function Tweets() {
   //Suppression d'un tweet
 
   const deleteTweet = (tweet_id) => {
+    console.log("Token envoyé :", user.token);
     fetch(`http://localhost:3000/tweet/${tweet_id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ token: user.token }),
+      body: JSON.stringify({ token: userConnection }),
     })
       .then((response) => response.json())
       .then((data) => {
         if (data.result) {
-          setTweetsData(tweetsData.filter((t) => t._id !== tweet_id));
+          fetchTweets();
         }
       });
   };
@@ -118,14 +119,14 @@ function Tweets() {
 
   // route Post pour liker les tweets
 
-   const likeTweet = () => {
+   const likeTweet = (tweet_id, currentIsLiked) => {
     fetch("http://localhost:3000/tweet/like", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         token: user.token,
         tweet_id: tweet_id,
-        isLiked: !currentIsLiked
+        isLiked: !currentIsLiked,
       }),
     })
       .then((response) => response.json())

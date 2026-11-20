@@ -9,9 +9,11 @@ let deleteIcon = null;
 if (props.token === props.userConnection) {
   deleteIcon = (
 <FontAwesomeIcon
-          onClick={() => props.deleteTweet()}
+          onClick={() => { 
+            console.log("Clic détecté sur la poubelle ! ID du tweet :", props.id);
+          props.deleteTweet(props.id)}}
           icon={faTrash}
-          style={faTrash}
+          style={{ cursor: 'pointer' }}
           className={styles.deleteIcon}
         />
   )
