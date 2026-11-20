@@ -88,7 +88,6 @@ function Tweets() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Réponse du backend :", data);
         if (data.result) {
           fetchTweets();
         }
@@ -99,14 +98,14 @@ function Tweets() {
 
   // route Post pour liker les tweets
 
-   const likeTweet = () => {
+   const likeTweet = (tweet_id, currentIsLiked) => {
     fetch("http://localhost:3000/tweet/like", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         token: user.token,
-        tweet_id: _id,
-        isLiked: !currentIsLiked
+        tweet_id: tweet_id,
+        isLiked: !currentIsLiked,
       }),
     })
       .then((response) => response.json())
