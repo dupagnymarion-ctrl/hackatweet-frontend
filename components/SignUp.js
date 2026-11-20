@@ -1,0 +1,64 @@
+"use client";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import styles from "../styles/SignUp.module.css";
+
+import { useRouter } from "next/navigation";
+import Link from 'next/link';
+import { login } from "../reducers/user";
+
+function SignUp() {
+  const dispatch = useDispatch()
+
+  const [firstname, setFirstname] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const router = useRouter();
+
+  /********************************/
+  const handleSignUp = () => {
+      fetch('http://localhost:3000/users/signup', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password }),
+      }).then(response => response.json())
+          .then(data => {
+            console.log(data)
+              if (data.result) {
+                  dispatch(login(firstname, username, data.token));
+                  setUsername('');
+                  setPassword('');
+                  router.push("/tweet");
+              }
+          });
+    }
+
+  return (
+    <div className={styles.container}>
+      <h2>Create your Hackatweet account</h2>
+
+      <input
+        type="text"
+        placeholder="Firstname"
+        value={firstname}
+        onChange={(event) => setFirstname(event.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="Username"
+        value={username}
+        onChange={(event) => setUsername(event.target.value)}
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(event) => setPassword(event.target.value)}
+      />
+      <Link href="/tweet">Go to profile page</Link>
+      <button onClick={handleSignUp}>Sign up</button>
+    </div>
+  );
+}
+export default SignUp;

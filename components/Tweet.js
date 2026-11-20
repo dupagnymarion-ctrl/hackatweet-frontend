@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 import styles from "../styles/Tweet.module.css";
 import { useEffect, useState } from "react";
+import Trends from "./Trends"
 
 function Tweets() {
 const[tweet, setTweet]= useState('')
@@ -91,8 +92,7 @@ const lastTweets = tweetsData.map((data, i) => {
         {lastTweets}
         </div>
       <div className={styles.hashtagContainer}>
-        <h3>Trends</h3>
-        <p>Liste Hashtag Components</p>
+        <Trends />
       </div>
     </div>
   );
