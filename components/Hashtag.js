@@ -21,7 +21,7 @@ const router = useRouter();
 
 useEffect(() => {
 
-    fetch(`http://localhost:3000/trend/hashtag/${user.token}/${encodeURIComponent(hashtag)}`)
+    fetch(`https://hackatweet-backend-sand.vercel.app/trend/hashtag/${user.token}/${encodeURIComponent(hashtag)}`)
     .then(response => response.json())
     .then(data => {
         if(data.result) {

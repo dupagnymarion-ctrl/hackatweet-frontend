@@ -15,7 +15,7 @@ function SignIn() {
   const handleSignIn = () => {
     setError("");
 
-    fetch("http://localhost:3000/users/signin", {
+    fetch("https://hackatweet-backend-sand.vercel.app/users/signin", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

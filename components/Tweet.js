@@ -27,7 +27,7 @@ function Tweets() {
 
   const fetchTweets = () => {
     let lastTweets = null;
- fetch(`http://localhost:3000/tweet/${user.token}`)
+ fetch(`https://hackatweet-backend-sand.vercel.app/tweet/${user.token}`)
       .then((response) => response.json())
       .then((data) => {
         if (data.result) {
@@ -58,7 +58,7 @@ function Tweets() {
   },[newTweet]);
 
   const postTrend = (id, hashtag) => {
-    fetch("http://localhost:3000/trend/add", {
+    fetch("https://hackatweet-backend-sand.vercel.app/trend/add", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -76,7 +76,7 @@ function Tweets() {
   const postTweet = () => {
     let hashtag = tweet.match(/#\w+/g);
 
-    fetch("http://localhost:3000/tweet/add", {
+    fetch("https://hackatweet-backend-sand.vercel.app/tweet/add", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -102,7 +102,7 @@ function Tweets() {
 
   const deleteTweet = (tweet_id) => {
     console.log("Token envoyé :", user.token);
-    fetch(`http://localhost:3000/tweet/${tweet_id}`, {
+    fetch(`https://hackatweet-backend-sand.vercel.app/tweet/${tweet_id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token: userConnection }),
@@ -120,7 +120,7 @@ function Tweets() {
   // route Post pour liker les tweets
 
    const likeTweet = (tweet_id, currentIsLiked) => {
-    fetch("http://localhost:3000/tweet/like", {
+    fetch("https://hackatweet-backend-sand.vercel.app/tweet/like"), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

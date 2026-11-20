@@ -12,14 +12,14 @@ function Trends() {
   const hashtag = useSelector((state) => state.trend.trigger)
 
   const [trends, setTrends] = useState ([])
-
+ const user = useSelector((state) => state.user.value)
   const handleResearchTrend = (value) => {
     dispatch(research(value))
     router.push("/hashtag");
   }
 
   useEffect(() => {
-    fetch(`http://localhost:3000/trend/Klu1LWnJSC-iVMcztCczLApwLxbknIIR`)
+    fetch(`https://hackatweet-backend-sand.vercel.app/trend/${user.token}`)
         .then(response => response.json())
         .then(data => {
             if (data.result) {
