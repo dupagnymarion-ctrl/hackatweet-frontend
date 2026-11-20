@@ -42,14 +42,13 @@ function Tweets() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        token: userConnection,
+        token: "WBmdNbWztaYIczBc1q1iLPsy6zWpAwrs",
         message: tweet,
       }),
     })
       .then((response) => response.json())
       .then((data) => {
         if (data.result) {
-          console.log(data);
           setTweetsData([...tweetsData, data.tweets]);
           setTweet("");
           setNewTweet(!newTweet); // état se recharge dès un nouveau tweet
@@ -63,7 +62,7 @@ function Tweets() {
     fetch(`http://localhost:3000/tweet/${tweet_id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ token: userConnection }),
+      body: JSON.stringify({ token: "WBmdNbWztaYIczBc1q1iLPsy6zWpAwrs" }),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -76,7 +75,7 @@ function Tweets() {
  
 
   const lastTweets = tweetsData.map((data, i) => {
-    console.log(data)
+    console.log(tweetsData)
     return (
       <LastTweets
         key={i}
@@ -85,7 +84,7 @@ function Tweets() {
         token={data.user.token}
         delete={deleteTweet}
         userConnection={userConnection}
-        isLiked={data.isliked}
+        isLiked={data.isLiked}
         likeTweet={() => likeTweet(data._id, data.isLiked)} 
       />
     );
@@ -99,7 +98,7 @@ function Tweets() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         token: "YjPL-MJi1S2HRSliTfuFeWPQJH9_KwT0",
-        tweet_id: _id,
+        tweet_id: tweet_id,
         isLiked: !currentIsLiked
       }),
     })
