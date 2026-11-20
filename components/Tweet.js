@@ -34,13 +34,13 @@ function Tweets() {
           setTweetsData(data.tweets);
           
           lastTweets = data.tweets.map((data, i) => {
-            //console.log('ici',tweetsData)
+          ('ici',tweetsData)
             return (
               <LastTweets
                 key={i}
                 id={data._id}
                 message={data.message}
-                token={user.token}
+                token={data.user.token}
                 deleteTweet={deleteTweet}
                 userConnection={userConnection}
                 isLiked={data.isLiked}
