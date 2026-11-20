@@ -16,24 +16,6 @@ function SignUp() {
 
   const router = useRouter();
 
-  /********************************/
-  const handleSignUp = () => {
-      fetch('http://localhost:3000/users/signup', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username, password }),
-      }).then(response => response.json())
-          .then(data => {
-            console.log(data)
-              if (data.result) {
-                  dispatch(login(firstname, username, data.token));
-                  setUsername('');
-                  setPassword('');
-                  router.push("/tweet");
-              }
-          });
-    }
-
   return (
     <div className={styles.container}>
       <h2>Create your Hackatweet account</h2>
