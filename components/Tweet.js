@@ -7,11 +7,14 @@ import Trends from "./Trends";
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 import { login, logout } from '../reducers/user';
+import { useRouter } from "next/navigation";
 
 function Tweets() {
   const [tweet, setTweet] = useState("");
   const [tweetsData, setTweetsData] = useState([]);
+  const [tweetsList, setTweetsList] = useState([]);
   const [newTweet, setNewTweet] = useState(false);
+  const router = useRouter();
 
   const dispatch = useDispatch();
 
@@ -22,11 +25,29 @@ function Tweets() {
 
 
   const fetchTweets = () => {
- fetch("http://localhost:3000/tweet/YjPL-MJi1S2HRSliTfuFeWPQJH9_KwT0")
+    let lastTweets = null;
+ fetch(`http://localhost:3000/tweet/${user.token}`)
       .then((response) => response.json())
       .then((data) => {
         if (data.result) {
           setTweetsData(data.tweets);
+          
+          lastTweets = data.tweets.map((data, i) => {
+            //console.log('ici',tweetsData)
+            return (
+              <LastTweets
+                key={i}
+                id={data._id}
+                message={data.message}
+                token={user.token}
+                deleteTweet={deleteTweet}
+                userConnection={userConnection}
+                isLiked={data.isLiked}
+                likeTweet={() => likeTweet(data._id, data.isLiked)} 
+              />
+            );
+          });
+          setTweetsList(lastTweets);
         }
       });
   }
@@ -42,14 +63,14 @@ function Tweets() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        token: "WBmdNbWztaYIczBc1q1iLPsy6zWpAwrs",
+        token: user.token,
         message: tweet,
       }),
     })
       .then((response) => response.json())
       .then((data) => {
         if (data.result) {
-          setTweetsData([...tweetsData, data.tweets]);
+          //setTweetsData([...tweetsData, data.tweets]);
           setTweet("");
           setNewTweet(!newTweet); // état se recharge dès un nouveau tweet
         }
@@ -59,36 +80,22 @@ function Tweets() {
   //Suppression d'un tweet
 
   const deleteTweet = (tweet_id) => {
+    console.log("Token envoyé :", user.token);
     fetch(`http://localhost:3000/tweet/${tweet_id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ token: "WBmdNbWztaYIczBc1q1iLPsy6zWpAwrs" }),
+      body: JSON.stringify({ token: userConnection }),
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log("Réponse du backend :", data);
         if (data.result) {
-          setTweetsData(tweetsData.filter((t) => t._id !== tweet_id));
+          fetchTweets();
         }
       });
   };
   
- 
 
-  const lastTweets = tweetsData.map((data, i) => {
-    console.log(tweetsData)
-    return (
-      <LastTweets
-        key={i}
-        id={data._id}
-        message={data.message}
-        token={data.user.token}
-        delete={deleteTweet}
-        userConnection={userConnection}
-        isLiked={data.isLiked}
-        likeTweet={() => likeTweet(data._id, data.isLiked)} 
-      />
-    );
-  });
 
   // route Post pour liker les tweets
 
@@ -97,8 +104,8 @@ function Tweets() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        token: "YjPL-MJi1S2HRSliTfuFeWPQJH9_KwT0",
-        tweet_id: tweet_id,
+        token: user.token,
+        tweet_id: _id,
         isLiked: !currentIsLiked
       }),
     })
@@ -121,7 +128,6 @@ function Tweets() {
     <div className={styles.tweetContainer}>
       <div className={styles.leftContainer}>
         <div>
-          <div>
             <Link href="/tweet">
               <FontAwesomeIcon
                 icon={faTwitter}
@@ -137,18 +143,14 @@ function Tweets() {
             </div>
             <button onClick={logoutClick}>Logout</button>
           </div>
-        </div>
       </div>
       <div className={styles.homeContainer}>
-        <div className={styles.homeHeader}>
-          <h3>Home</h3>
-          <input onChange={(e) => setTweet(e.target.value)} value={tweet} />
-          <button className={styles.buttonTweet} onClick={postTweet}>
-            Tweet
-          </button>      
-        </div>
-        <div className={styles.tweetsScrollContainer}>{lastTweets}</div>
+        <h3>Home</h3>
+        <input onChange={(e) => setTweet(e.target.value)} value={tweet}/>
+        <button className={styles.buttonTweet} onClick={() => postTweet()}>Tweet</button>
+        {tweetsList}
       </div>
+        
       <div className={styles.hashtagContainer}>
         <Trends />
       </div>

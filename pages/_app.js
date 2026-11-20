@@ -1,6 +1,7 @@
 import '../styles/globals.css';
 import Head from 'next/head';
 import user from '../reducers/user';
+import trend from '../reducers/trend';
 
 import { Provider } from 'react-redux';
 import { persistStore, persistReducer } from 'redux-persist';
@@ -9,7 +10,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
 import storage from 'redux-persist/lib/storage';
 
-const reducers= combineReducers({user})
+const reducers= combineReducers({user, trend})
 const persistConfig= {key: 'hackatweet', storage}
 const store = configureStore({
 reducer: persistReducer(persistConfig, reducers),
