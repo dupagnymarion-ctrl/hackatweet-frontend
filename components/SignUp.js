@@ -1,13 +1,21 @@
+"use client";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import styles from "../styles/SignUp.module.css";
+
+import { useRouter } from "next/navigation";
+import Link from 'next/link';
+import { login } from "../reducers/user";
+
 function SignUp() {
+  const dispatch = useDispatch()
+
   const [firstname, setFirstname] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSignUp = () => {
-    console.log("inscription demandée", firstname, username);
-  };
+  const router = useRouter();
+
   return (
     <div className={styles.container}>
       <h2>Create your Hackatweet account</h2>
@@ -30,7 +38,7 @@ function SignUp() {
         value={password}
         onChange={(event) => setPassword(event.target.value)}
       />
-
+      <Link href="/tweet">Go to profile page</Link>
       <button onClick={handleSignUp}>Sign up</button>
     </div>
   );

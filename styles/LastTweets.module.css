@@ -1,0 +1,14 @@
+.heartIcon {
+    display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.userIcon {
+    display: flex;
+    
+}
+
+.twitterIcon {
+    display: flex;
+}
