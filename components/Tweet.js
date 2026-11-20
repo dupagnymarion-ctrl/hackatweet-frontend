@@ -128,7 +128,7 @@ function Tweets() {
         tweet_id: tweet_id,
         isLiked: !currentIsLiked,
       }),
-    })
+    }
       .then((response) => response.json())
       .then((data) => {
       if (data.result) {
