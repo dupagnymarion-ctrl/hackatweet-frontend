@@ -145,9 +145,9 @@ function Tweets() {
           <input onChange={(e) => setTweet(e.target.value)} value={tweet} />
           <button className={styles.buttonTweet} onClick={postTweet}>
             Tweet
-          </button>
-          <div className={styles.tweetsScrollContainer}>{lastTweets}</div>
+          </button>      
         </div>
+        <div className={styles.tweetsScrollContainer}>{lastTweets}</div>
       </div>
       <div className={styles.hashtagContainer}>
         <Trends />

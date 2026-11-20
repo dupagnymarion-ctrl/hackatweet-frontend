@@ -9,7 +9,7 @@ let deleteIcon = null;
 if (props.token === props.userConnection) {
   deleteIcon = (
 <FontAwesomeIcon
-          onClick={() => props.deleteTwee()}
+          onClick={() => props.deleteTweet()}
           icon={faTrash}
           style={faTrash}
           className={styles.deleteIcon}
