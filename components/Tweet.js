@@ -3,12 +3,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 import styles from "../styles/Tweet.module.css";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Trends from "./Trends"
 
 function Tweets() {
 const[tweet, setTweet]= useState('')
 const[tweetsData, setTweetsData] = useState([]);
-const[newTweet, setNewTweet] = useState(false)
+const[newTweet, setNewTweet] = useState(false);
+const router = useRouter();
 
 // 1 récupere tous les tweets au chargement de la base de données
 
@@ -33,7 +35,7 @@ fetch('http://localhost:3000/tweet/add', {
 		}).then(response => response.json())
 			.then(data => {
                 if (data.result) {
-                console.log(data)
+                //console.log(data)
                 setTweetsData([data.tweets, ...tweetsData]);
                 setTweet('');
                 setNewTweet(!newTweet)
@@ -67,6 +69,10 @@ const lastTweets = tweetsData.map((data, i) => {
     />
 })
 
+const logout = () => {
+  router.push("/");
+}
+
   return (
     <div className={styles.tweetContainer}>
       <div className={styles.leftContainer}>
@@ -76,14 +82,14 @@ const lastTweets = tweetsData.map((data, i) => {
             style={styles.faTwitter}
             className={styles.twitterIcon}
           />
-          <button >Logout</button>
+          <button onClick={() => logout()}>Logout</button>
         </div>
       </div>
       <div>
       <div className={styles.homeContainer}>
         <h3>Home</h3>
         <input onChange={(e) => setTweet(e.target.value)} value={tweet}/>
-        <button className={styles.buttonTweet} onClick={postTweet}>Tweet</button>
+        <button className={styles.buttonTweet} onClick={postTweet()}>Tweet</button>
       </div>
         {lastTweets}
         </div>
