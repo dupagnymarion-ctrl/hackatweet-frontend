@@ -87,7 +87,7 @@ function Tweets() {
       .then((response) => response.json())
       .then((data) => {
         if (data.result) {
-          if(hashtag.length > 0) {
+          if(hashtag !== null && hashtag.length > 0) {
             postTrend(data.tweets._id,hashtag)
           }
           //console.log(data.tweets._id)
@@ -120,7 +120,7 @@ function Tweets() {
   // route Post pour liker les tweets
 
    const likeTweet = (tweet_id, currentIsLiked) => {
-    fetch("https://hackatweet-backend-sand.vercel.app/tweet/like"), {
+    fetch("https://hackatweet-backend-sand.vercel.app/tweet/like", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -128,7 +128,7 @@ function Tweets() {
         tweet_id: tweet_id,
         isLiked: !currentIsLiked,
       }),
-    }
+    })
       .then((response) => response.json())
       .then((data) => {
       if (data.result) {
